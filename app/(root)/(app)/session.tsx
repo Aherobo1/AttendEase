@@ -8,7 +8,7 @@ import { handleDisableDataLoading } from '@/utilities/handleDisableDataLoading';
 import InterText from '@/components/InterText';
 import CustomButton from '@/components/CustomButton';
 import { HEIGHT } from '@/utilities/dimensions';
-import { useRouter } from 'expo-router';
+import { usePathname, useRouter } from 'expo-router';
 import { getLoadingData } from '@/utilities/getLoadingData';
 import SettingListItem from '@/components/SettingListItem';
 import moment from 'moment';
@@ -21,7 +21,8 @@ type SettingListItemProps = Setting & {
 
 const Session = () => {
 
-	const router = useRouter()
+	const router = useRouter();
+	const pathname = usePathname();
 
 	const [settings, setSettings] = useState<Setting[]>([]);
 
@@ -48,7 +49,7 @@ const Session = () => {
 		}
 
 		fetchSettings()
-	}, [])
+	}, [pathname])
 
 	const data = useMemo((): SettingListItemProps[] => {
 		if (dataLoading.settings) {
@@ -77,13 +78,8 @@ const Session = () => {
 
 		const semester = settings.find((setting) => setting.key === 'semester');
 
-		if (semester?.value === '1') {
-			router.push('/(root)/(app)/(session)/StartNewSemester')
-			return;
-		} else if (semester?.value === '2') {
-			router.push('/(root)/(app)/(session)/StartNewSession')
-			return;
-		}
+		router.push('/(root)/(app)/(session)/StartNewSemester')
+		return;
 	}, [settings]);
 
 	const getDisabledButton = useCallback((): boolean => {

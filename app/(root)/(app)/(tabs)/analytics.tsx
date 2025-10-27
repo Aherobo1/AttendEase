@@ -39,6 +39,7 @@ type RecordListItem = {
 	id: string,
 	course: Course,
 	total_classes: number,
+	total_completed_lectures?: number,
 	classes_per_week: number,
 	total_lecturers?: number,
 	total_weeks: number,
@@ -469,6 +470,7 @@ const Analytics = () => {
 				classes_per_week: schedules.find(item => item.course_id === id || item?.course_code === courses.find(i => i.id === id)?.course_code)?.days_of_the_week?.length || 1,
 				total_weeks: numberOfSemesterWeeks,
 				total_lecturers: attendanceSession.filter(item => item.course_id === id)?.length, 
+				total_completed_lectures: attendanceSession.filter(item => item.course_id === id && !item.is_active)?.length, 
 				settings,
 				// classes_per_week: 1,
 			}
@@ -524,6 +526,7 @@ const Analytics = () => {
 			totalClasses={item?.total_classes}
 			totalWeeks={item?.total_weeks}
 			totalLecturers={item?.total_lecturers}
+			totalCompletedLecturers={item?.total_completed_lectures}
 			classesPerWeek={item?.classes_per_week}
 			onPress={() => {
 				if (!item?.course?.course_code) return;

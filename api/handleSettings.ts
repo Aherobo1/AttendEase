@@ -125,6 +125,28 @@ const getByKeys = async (keys: Key[]): Promise<Response<Setting[]>> => {
     }
 }
 
+const startNextSemester = async ({start_date, end_date}: {start_date: string, end_date: string}): Promise<Response<null>> => {
+    try {
+        const { data, error, status } = await supabase
+            .rpc('start_next_semester', {
+                start_date, 
+                end_date
+            })
+            
+        if (error && status !== 406) {
+            throw error;
+        }
+
+        return {
+            isSuccessful: true,
+            message: "Setting selected successfully",
+            data: null,
+        } 
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 
 export default {
@@ -133,4 +155,5 @@ export default {
     update,
     getByKey,
     getByKeys,
+    startNextSemester,
 }

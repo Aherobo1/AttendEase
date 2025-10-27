@@ -25,12 +25,16 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import handleStudents from '@/api/handleStudents';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { supabase } from '@/lib/supabase';
+import { HEIGHT, WIDTH } from '@/utilities/dimensions';
 
 
 export default function AppLayout() {
 
     const session = useAuthStore((state) => state.session);
-    const user = useAuthStore((state) => state.user);
+    const user = useAuthStore((state) => {
+		return state.user;
+    });
+	// console.log("🚀 ~ AppLayout ~ user:", user)
     const signOut = useAuthStore((state) => state.signOut);
     const setUser = useAuthStore((state) => state.setUser);
     const isFirstLaunch = useAuthStore((state) => state.isFirstLaunch);
@@ -44,8 +48,10 @@ export default function AppLayout() {
 	} = useAppStore.getState();
 
 	const DEVICE_ID = Device.manufacturer+''+Device.brand+''+Device.modelName;
+	// console.log("🚀 ~ AppLayout ~ DEVICE_ID:", DEVICE_ID)
 
 	const [isScanning, setIsScanning] = useState(false);
+	// console.log("🚀 ~ AppLayout ~ isScanning:", isScanning)
 
 	const handleScanAuthorisation = () => {
 	  
@@ -415,7 +421,6 @@ export default function AppLayout() {
 						top: 0,
 						left: 0,
 						zIndex: 100,
-						display: 'none'
 					}}
 				>
 					{!isScanning ? (

@@ -297,7 +297,7 @@ const EditLecturer = () => {
 					if (item.id === id) {
 						return {
 							...item,
-							is_selected: true,
+							is_selected: !item.is_selected,
 						}
 					}
 					return item;
@@ -341,7 +341,7 @@ const EditLecturer = () => {
 				handleSelectCourse(item.id)
 			}}
 		/>
-	), []);
+	), [handleSelectCourse]);
 
 	const handleUpdateLecturer = async () => {
 		try {

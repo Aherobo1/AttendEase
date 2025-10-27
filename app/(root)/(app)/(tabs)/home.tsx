@@ -548,7 +548,10 @@ const Home = () => {
 			isLoading={item?.is_loading}
 			onPress={(schedule) => {
 				// console.log("🚀 ~ schedule:", schedule)
-				if (!schedule.course) return;
+				if (!schedule.course) {
+					displayToast('ERROR', 'This attendance session does not have a course id')
+					return;
+				};
 				// return;
 
 				router.push({

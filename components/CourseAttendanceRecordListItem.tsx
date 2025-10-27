@@ -13,11 +13,12 @@ interface CourseAttendanceRecordListItemProps {
     totalWeeks: number,
     totalClasses: number,
     totalLecturers?: number,
+    totalCompletedLecturers?: number,
     classesPerWeek: number,
     onPress: () => void,
 }
 
-const CourseAttendanceRecordListItem: FC<CourseAttendanceRecordListItemProps> = ({ totalLecturers, course, isLoading, totalWeeks, totalClasses, classesPerWeek, onPress }) => {
+const CourseAttendanceRecordListItem: FC<CourseAttendanceRecordListItemProps> = ({ totalCompletedLecturers, totalLecturers, course, isLoading, totalWeeks, totalClasses, classesPerWeek, onPress }) => {
     const progress = Math.min((totalClasses/(totalWeeks*classesPerWeek)) * 100, 100);
     
     return (
@@ -106,13 +107,13 @@ const CourseAttendanceRecordListItem: FC<CourseAttendanceRecordListItemProps> = 
                         // gap={5}
                         alignItems='flex-end'
                     >
-                        {totalLecturers !== undefined && totalLecturers - totalClasses > 0 && (
+                        {totalCompletedLecturers !== undefined && totalCompletedLecturers - totalClasses > 0 && (
                             <InterText
                                 fontSize={10}
                                 fontWeight={500}
                                 color={colors.error}
                             >
-                                {totalLecturers - totalClasses} missed lectures
+                                {totalCompletedLecturers - totalClasses} missed lectures
                             </InterText>
                         )}
                         <InterText

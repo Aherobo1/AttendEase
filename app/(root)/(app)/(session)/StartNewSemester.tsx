@@ -8,6 +8,7 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import CustomCalendar from '@/components/CustomCalendar'
 import handleSettings, { SettingPayload } from '@/api/handleSettings'
 import { useAppStore } from '@/stores/useAppStore'
+import { router } from 'expo-router'
 
 const StartNewSemester = () => {
 
@@ -41,32 +42,42 @@ const StartNewSemester = () => {
         try {
             setIsLoading(true);
 
-            const sessionData: SettingPayload[] = [
-                // {
-                //     key: 'academic_session',
-                //     value: academicSession,
-                //     type: 'string'
-                // },
-                // {
-                //     key: 'semester',
-                //     value: semester?.toString() ?? '',
-                //     type: 'number'
-                // },
-                {
-                    key: 'start_of_semester',
-                    value: startDate,
-                    type: 'date'
-                },
-                {
-                    key: 'end_of_semester',
-                    value: endDate,
-                    type: 'date'
-                }
-            ]
+            // const sessionData: SettingPayload[] = [
+            //     // {
+            //     //     key: 'academic_session',
+            //     //     value: academicSession,
+            //     //     type: 'string'
+            //     // },
+            //     // {
+            //     //     key: 'semester',
+            //     //     value: semester?.toString() ?? '',
+            //     //     type: 'number'
+            //     // },
+            //     {
+            //         key: 'start_of_semester',
+            //         value: startDate,
+            //         type: 'date'
+            //     },
+            //     {
+            //         key: 'end_of_semester',
+            //         value: endDate,
+            //         type: 'date'
+            //     }
+            // ]
 
-            for (const object of sessionData) {
-                await handleSettings.create(object);
-            }
+            // for (const object of sessionData) {
+            //     await handleSettings.create(object);
+            // }
+
+            await handleSettings.startNextSemester({
+                start_date: startDate,
+                end_date: endDate
+            })
+
+            displayToast('SUCCESS', "Semester setting updated successfully")
+
+            router.back();
+
         } catch (error: any) {
             displayToast('ERROR', error?.message)
         } finally {

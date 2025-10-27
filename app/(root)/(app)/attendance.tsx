@@ -412,7 +412,7 @@ const Attendance = () => {
 		}
 	}, []);
 
-	const handleLogAttendance = async (session_id: string) => {
+	const handleLogAttendance = useCallback(async (session_id: string) => {
 		try {
 			setLoadingPages([...loadingPages, pathname])
 			const isEnrolled = await LocalAuthentication.isEnrolledAsync();
@@ -445,7 +445,7 @@ const Attendance = () => {
 		} finally {
 			setLoadingPages(loadingPages.filter(item => item !== pathname))
 		}
-	}
+	}, [userCoordinates])
 	
 	useEffect(() => {
 		if (!isFetchingCard) return;
@@ -496,7 +496,7 @@ const Attendance = () => {
 		}
 
 		hanldePinVerification()
-	}, [scannedCardTopic, scannedCard])
+	}, [scannedCardTopic, scannedCard, handleLogAttendance])
 
 	    // get user/device location
     useEffect(() => {

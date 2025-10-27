@@ -71,7 +71,7 @@ const CustomCalendar = React.forwardRef<BottomSheetModal, CustomCalendarProps>((
             handleComponent={() => <></>}
             {...rest}
         >
-            <BottomSheetView 
+            <View 
                 style={styles.modal}
             >
                 <Pressable onPress={closeCalendar} style={styles.container} />
@@ -100,7 +100,7 @@ const CustomCalendar = React.forwardRef<BottomSheetModal, CustomCalendarProps>((
                         disableAllTouchEventsForInactiveDays={true}
                     />
                 </View>
-            </BottomSheetView>
+            </View>
         </CustomBottomSheet>
     );
 })
