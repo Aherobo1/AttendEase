@@ -10,6 +10,7 @@
 - **Attendance Records**: View personal attendance history and statistics
 - **Real-time Sessions**: See active attendance sessions for enrolled courses
 - **Profile Management**: Update profile information and change PIN/password
+- **Device Binding**: Secure account access with device-specific authentication
 - **Support System**: Submit and track support tickets
 
 ### For Lecturers
@@ -17,6 +18,7 @@
 - **Course Management**: View and manage assigned courses
 - **Attendance Tracking**: Monitor student attendance in real-time
 - **Schedule Management**: Create and manage class schedules
+- **Device Authorization**: Authorize students' new devices by scanning QR codes for secure access
 - **Reports**: Generate attendance reports for courses
 
 ### For Administrators
@@ -133,7 +135,8 @@ The system implements a robust multi-factor authentication strategy using IoT de
 1. **RFID Card Verification**: Students use RFID cards for quick check-in
 2. **PIN Authentication**: Additional security layer with PIN verification
 3. **Geolocation Verification**: Ensures students are physically present in the classroom
-4. **Biometric Support**: Device-level biometric authentication for enhanced security
+4. **Device Binding**: Students' accounts are bound to their mobile devices. If a student attempts to log in on a new device, access is denied until a lecturer authorizes the device by scanning a QR code displayed on the student's new device
+5. **Biometric Support**: Device-level biometric authentication for enhanced security
 
 ### Real-time Communication
 - MQTT protocol for real-time RFID card scanning
@@ -152,6 +155,8 @@ The system implements a robust multi-factor authentication strategy using IoT de
 - Row-level security (RLS) policies
 - Encrypted data transmission
 - PIN-based secondary authentication
+- **Device-specific authorization**: Each student account is bound to their registered device, preventing unauthorized access from other devices
+- **QR Code-based Device Authorization**: Lecturers can authorize new student devices by scanning QR codes, ensuring controlled access
 - Device-specific authorization
 - Biometric authentication support
 
